@@ -1,0 +1,38 @@
+<h1> Hardware To Replace: {{ hardware.name }}</h1>
+<h2> Hardware Replace List:</h2>
+<div *ngFor="let hardware of hardwareList; index as productId">
+    <div *ngIf="hardware.hardwareStatus.id==1">
+        <div class="hardware-item__name">
+            <h3>
+                Name: {{hardware.name}}
+            </h3>
+        </div>
+        <div class="hardware-item__details-replace">
+            <div class="hardware-item__details-hardware-replace">
+                <p class="hardware-item__details-record" *ngIf="hardware.serial">
+                    Serial: {{ hardware.serial }}
+
+                </p>
+                <p class="hardware-item__details-record" *ngIf="hardware.hardwareStatus">
+                    Status: <b *ngIf="hardware.hardwareStatus.id==1" class="text-status-normal">{{ hardware.hardwareStatus.name }}</b>
+                    <b *ngIf="hardware.hardwareStatus.id==2" class="text-status-fail">{{ hardware.hardwareStatus.name }}</b>
+                    <b *ngIf="hardware.hardwareStatus.id==3" class="text-status-under-maintenance">{{ hardware.hardwareStatus.name }}</b>
+                    <b *ngIf="hardware.hardwareStatus.id==4" class="text-status-under-to-replace">{{ hardware.hardwareStatus.name }}</b>
+                </p>
+            </div>
+        </div>
+        <div class="hardware-button">
+            <p>
+                <button (click)="replace(hardware)">
+                    Replace
+                </button>
+            </p>
+        </div>
+    </div>
+</div>
+<p>
+    <button (click)="close()">
+        Close
+    </button>
+</p>
+

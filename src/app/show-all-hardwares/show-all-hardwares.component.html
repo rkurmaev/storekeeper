@@ -1,0 +1,45 @@
+<h2 class="header-item__name"><b>All Devices:</b></h2>
+<div class="hardware-item" *ngFor="let hardware of hardwareList; index as productId">
+    <div class="hardware-item__name">
+        <h3 *ngIf="hardware.name">
+            <a [title]="hardware.name + ' details'" [routerLink]="['/products', hardware.id]">
+                {{ hardware.name }}
+            </a>
+        </h3>
+    </div>
+    <div class="hardware-item__details">
+        <div class="hardware-item__details-hardware">
+            <p class="hardware-item__details-record" *ngIf="hardware.serial">
+                Hardware Serial: {{ hardware?.serial }}
+            </p>
+            <p class="hardware-item__details-record" *ngIf="hardware.hardwareStatus">
+                Hardware Status:
+                <b *ngIf="hardware.hardwareStatus.id==1"
+                   class="text-status-normal">{{ hardware.hardwareStatus.name }}</b>
+                <b *ngIf="hardware.hardwareStatus.id==3"
+                   class="text-status-under-maintenance">{{ hardware.hardwareStatus.name }}</b>
+                <b *ngIf="hardware.hardwareStatus.id==4"
+                   class="text-status-under-to-replace">{{ hardware.hardwareStatus.name }}</b>
+            </p>
+        </div>
+        <div class="hardware-item__details-service" *ngIf="hardware.hardwareService; else noServiceBlock">
+            <p class="hardware-item__details-record" *ngIf="hardware.hardwareService">
+                Hardware Service: {{ hardware.hardwareService.name }}
+            </p>
+            <p class="hardware-item__details-record" *ngIf="hardware.hardwareService">
+                Hardware Service Status: <b *ngIf="hardware.hardwareService.serviceStatus.id==1"
+                                            class="text-status-normal">{{ hardware.hardwareService.serviceStatus.name }}</b>
+                <b *ngIf="hardware.hardwareService.serviceStatus.id==2"
+                   class="text-status-fail">{{ hardware.hardwareService.serviceStatus.name }}</b>
+            </p>
+        </div>
+        <ng-template #noServiceBlock>
+            <div class="hardware-no-service-block">
+                <p class="hardware-no-service">
+                    Hardware Service: No Service
+                </p>
+            </div>
+        </ng-template>
+    </div>
+
+</div>
